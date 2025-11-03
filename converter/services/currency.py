@@ -1,14 +1,19 @@
 import requests
+import os
 from requests.exceptions import HTTPError
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Currency():
     def __init__(self, headers=None, base_currency='USD'):
         self.url = 'https://api.currencyapi.com/v3/latest'
         self.base_currency = base_currency
+        api_key = os.getenv('CURRENCY_API_KEY')
         if headers is None:
             headers = {
-                'apikey': 'cur_live_JZgFOek59tXv7CXYlWUrKn7Z62U18OAp33qxJ4js'}
+                'apikey': api_key}
         self.headers = headers
 
     def fetch_data(self):
